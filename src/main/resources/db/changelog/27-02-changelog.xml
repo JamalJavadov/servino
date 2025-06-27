@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1751005338687-12" author="camal">
+        <dropForeignKeyConstraint baseTableName="comment" constraintName="fk_comment_on_user"/>
+    </changeSet>
+    <changeSet id="1751005338687-13" author="camal">
+        <dropForeignKeyConstraint baseTableName="refresh_token" constraintName="fk_refreshtoken_on_user"/>
+    </changeSet>
+    <changeSet id="1751005338687-14" author="camal">
+        <dropForeignKeyConstraint baseTableName="user_comments" constraintName="fk_usecom_on_comment"/>
+    </changeSet>
+    <changeSet id="1751005338687-15" author="camal">
+        <dropForeignKeyConstraint baseTableName="user_comments" constraintName="fk_usecom_on_user"/>
+    </changeSet>
+    <changeSet id="1751005338687-16" author="camal">
+        <dropForeignKeyConstraint baseTableName="user_products" constraintName="fk_usepro_on_product"/>
+    </changeSet>
+    <changeSet id="1751005338687-17" author="camal">
+        <dropForeignKeyConstraint baseTableName="user_products" constraintName="fk_usepro_on_user"/>
+    </changeSet>
+    <changeSet id="1751005338687-1" author="camal">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="local_date_time" type="DATETIME"/>
+            <column name="role" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="is_verified" type="BOOLEAN"/>
+            <column name="avatar_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1751005338687-2" author="camal">
+        <createTable tableName="users_comments">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comments_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1751005338687-3" author="camal">
+        <createTable tableName="users_products">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1751005338687-4" author="camal">
+        <addUniqueConstraint columnNames="comments_id" constraintName="uc_users_comments_comments"
+                             tableName="users_comments"/>
+    </changeSet>
+    <changeSet id="1751005338687-5" author="camal">
+        <addUniqueConstraint columnNames="products_id" constraintName="uc_users_products_products"
+                             tableName="users_products"/>
+    </changeSet>
+    <changeSet id="1751005338687-6" author="camal">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="comment" constraintName="FK_COMMENT_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1751005338687-7" author="camal">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="refresh_token"
+                                 constraintName="FK_REFRESHTOKEN_ON_USER" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1751005338687-8" author="camal">
+        <addForeignKeyConstraint baseColumnNames="comments_id" baseTableName="users_comments"
+                                 constraintName="fk_usecom_on_comment" referencedColumnNames="id"
+                                 referencedTableName="comment"/>
+    </changeSet>
+    <changeSet id="1751005338687-9" author="camal">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_comments"
+                                 constraintName="fk_usecom_on_user" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1751005338687-10" author="camal">
+        <addForeignKeyConstraint baseColumnNames="products_id" baseTableName="users_products"
+                                 constraintName="fk_usepro_on_product" referencedColumnNames="id"
+                                 referencedTableName="product"/>
+    </changeSet>
+    <changeSet id="1751005338687-11" author="camal">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_products"
+                                 constraintName="fk_usepro_on_user" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1751005338687-20" author="camal">
+        <dropTable cascadeConstraints="true" tableName="user"/>
+    </changeSet>
+    <changeSet id="1751005338687-21" author="camal">
+        <dropTable cascadeConstraints="true" tableName="user_comments"/>
+    </changeSet>
+    <changeSet id="1751005338687-22" author="camal">
+        <dropTable cascadeConstraints="true" tableName="user_products"/>
+    </changeSet>
+
+</databaseChangeLog>
