@@ -46,7 +46,8 @@ public class SecurityConfiguration {
                         "/google-success.html",
                         "/css/**",
                         "/js/**",
-                        "/images/**").permitAll()  // Add your endpoints here
+                        "/images/**,",
+                        "/api/v1/authbusiness/**").permitAll()  // Add your endpoints here
                 .anyRequest().authenticated()).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BusinessRequestDto {
+    private String password;
 
     private String businessName;
 
