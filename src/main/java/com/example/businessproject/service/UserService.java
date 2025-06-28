@@ -20,6 +20,7 @@ public class UserService {
 
     public UserResponseDto getUserByEmail(String email){
         User user = userRepository.findByEmail(email).orElseThrow(()->new UserNotFoundException("User Not Found"));
+        System.out.println(userMapper.toDto(user).getEmail());
         return userMapper.toDto(user);
     }
 

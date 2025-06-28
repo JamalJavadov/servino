@@ -23,4 +23,6 @@ public class BusinessService {
         updatedBusiness.setId(business.getId());//bu hisseni deyisersen
         return businessMapper.toDto(businessRepository.save(updatedBusiness));
     }
+
+
 }

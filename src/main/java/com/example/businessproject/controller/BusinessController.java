@@ -1,18 +1,24 @@
 package com.example.businessproject.controller;
 
+import com.example.businessproject.model.dto.business.BusinessResponseDto;
+import com.example.businessproject.model.dto.business.BusinessUpdateDto;
+import com.example.businessproject.service.BusinessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/business")
 public class BusinessController {
+    private final BusinessService businessService;
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello(){
-        return ResponseEntity.ok("Hello");
+    @PreAuthorize("hasRole('BUSINESSMAN')")
+    @PutMapping("/update")
+    public ResponseEntity<BusinessResponseDto> updateBusiness(@RequestBody BusinessUpdateDto businessUpdateDto){
+        return ResponseEntity.ok(businessService.updateBusiness(businessUpdateDto));
     }
+
+
 }

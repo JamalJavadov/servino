@@ -4,4 +4,4 @@ databaseChangeLog:
   - include:
       file: db/changelog/27-02-changelog.xml
   - include:
-      file: db/changelog/27-03-changelog.xml1
+      file: db/changelog/27-03-changelog.xml
