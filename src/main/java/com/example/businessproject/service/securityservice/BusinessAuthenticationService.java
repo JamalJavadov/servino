@@ -11,6 +11,7 @@ import com.example.businessproject.repository.BusinessRepository;
 import com.example.businessproject.service.notification.EmailService;
 import com.example.businessproject.service.notification.VerificationCodeStore;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -23,6 +24,7 @@ public class BusinessAuthenticationService {
     private final VerificationCodeStore verificationCodeStore;
     private final JwtService jwtService;
     private final BusinessRefreshTokenService businessRefreshTokenService;
+    private final PasswordEncoder passwordEncoder;
 
 
     public String register(BusinessRequestDto businessRequestDto){
@@ -33,6 +35,7 @@ public class BusinessAuthenticationService {
                 .contactMail(businessRequestDto.getContactMail())
                 .contactNumber(businessRequestDto.getContactNumber())
                 .category(businessRequestDto.getCategory())
+                .password(passwordEncoder.encode(businessRequestDto.getPassword()))
                 .build();
         businessRepository.save(business);
         return "Register Successfully";
