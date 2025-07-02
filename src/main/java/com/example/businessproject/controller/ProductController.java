@@ -1,5 +1,6 @@
 package com.example.businessproject.controller;
 
+import com.example.businessproject.model.dto.auth.AuthenticationRequestDto;
 import com.example.businessproject.model.dto.product.ProductRequestDto;
 import com.example.businessproject.model.dto.product.ProductResponseDto;
 import com.example.businessproject.model.dto.product.ProductUpdateDto;
@@ -34,5 +35,12 @@ public class ProductController {
     public ResponseEntity<List<ProductResponseDto>> getProducts(){
         return ResponseEntity.ok(productServices.getAll());
     }
+
+    @PreAuthorize("hasRole('BUSINESSMAN')")
+    @PostMapping("/get-business-products")
+    public ResponseEntity<List<ProductResponseDto>> getBusinessProducts(@RequestBody AuthenticationRequestDto authenticationRequestDto){
+        return ResponseEntity.ok(productServices.getBusinessProducts(authenticationRequestDto));
+    }
+
 
 }

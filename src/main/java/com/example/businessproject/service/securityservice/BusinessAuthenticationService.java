@@ -2,16 +2,13 @@ package com.example.businessproject.service.securityservice;
 
 import com.example.businessproject.exception.BusinessNotFoundException;
 import com.example.businessproject.exception.CodeExpire;
-import com.example.businessproject.exception.UserNotFoundException;
 import com.example.businessproject.model.dto.auth.AuthenticationRequestDto;
 import com.example.businessproject.model.dto.auth.AuthenticationResponseDto;
 import com.example.businessproject.model.dto.business.BusinessRequestDto;
 import com.example.businessproject.model.dto.code.AuthCodeVerficationDto;
 import com.example.businessproject.model.entity.Business;
 import com.example.businessproject.model.entity.Role;
-import com.example.businessproject.model.entity.User;
 import com.example.businessproject.repository.BusinessRepository;
-import com.example.businessproject.repository.UserRepository;
 import com.example.businessproject.service.notification.EmailService;
 import com.example.businessproject.service.notification.VerificationCodeStore;
 import lombok.RequiredArgsConstructor;
@@ -69,7 +66,7 @@ public class BusinessAuthenticationService {
             String refreshToken = businessRefreshTokenService.createRefreshToken(business).getToken();
             return AuthenticationResponseDto.builder().token(jwtToken).refreshToken(refreshToken).build();
         } else {
-            throw new CodeExpire("code tap tap");
+            throw new CodeExpire("Verification Failed");
         }
     }
 }
