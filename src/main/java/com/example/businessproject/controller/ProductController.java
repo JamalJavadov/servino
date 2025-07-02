@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/product")
@@ -21,9 +23,16 @@ public class ProductController {
        return ResponseEntity.ok(productServices.createProduct(productRequestDto));
     }
 
-
+    @PreAuthorize("hasRole('BUSINESSMAN')")
     @PutMapping("/update")
     public ResponseEntity<ProductResponseDto> updateProduct(@RequestBody ProductUpdateDto productUpdateDto){
         return ResponseEntity.ok(productServices.updateProduct(productUpdateDto));
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get-products")
+    public ResponseEntity<List<ProductResponseDto>> getProducts(){
+        return ResponseEntity.ok(productServices.getAll());
+    }
+
 }

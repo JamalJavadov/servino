@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -43,10 +44,16 @@ public class UserAuthenticationService {
     }
 
     public String authenticateSendCode(AuthenticationRequestDto request) {
+        Optional<User> user = userRepository.findByEmail(request.getEmail());
+        if (user.isPresent()){
         String code = String.valueOf(new Random().nextInt(900000)+100000);
         verificationCodeStore.saveCode(request.getEmail(),code);
         emailService.sendVerificationCode(request.getEmail(),code);
         return "Verification Code Send";
+
+        }else {
+            throw new UserNotFoundException("User Not Found");
+        }
     }
 
     public AuthenticationResponseDto verifyCode(AuthCodeVerficationDto authCodeVerfication) {

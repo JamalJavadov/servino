@@ -2,18 +2,23 @@ package com.example.businessproject.service.securityservice;
 
 import com.example.businessproject.exception.BusinessNotFoundException;
 import com.example.businessproject.exception.CodeExpire;
+import com.example.businessproject.exception.UserNotFoundException;
 import com.example.businessproject.model.dto.auth.AuthenticationRequestDto;
 import com.example.businessproject.model.dto.auth.AuthenticationResponseDto;
 import com.example.businessproject.model.dto.business.BusinessRequestDto;
 import com.example.businessproject.model.dto.code.AuthCodeVerficationDto;
 import com.example.businessproject.model.entity.Business;
+import com.example.businessproject.model.entity.Role;
+import com.example.businessproject.model.entity.User;
 import com.example.businessproject.repository.BusinessRepository;
+import com.example.businessproject.repository.UserRepository;
 import com.example.businessproject.service.notification.EmailService;
 import com.example.businessproject.service.notification.VerificationCodeStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -27,6 +32,7 @@ public class BusinessAuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
 
+
     public String register(BusinessRequestDto businessRequestDto){
         Business business = Business.builder()
                 .businessName(businessRequestDto.getBusinessName())
@@ -36,16 +42,23 @@ public class BusinessAuthenticationService {
                 .contactNumber(businessRequestDto.getContactNumber())
                 .category(businessRequestDto.getCategory())
                 .password(passwordEncoder.encode(businessRequestDto.getPassword()))
+                .role(Role.BUSINESSMAN)
                 .build();
         businessRepository.save(business);
         return "Register Successfully";
     }
 
     public String authenticateSendCode(AuthenticationRequestDto request) {
+        Optional<Business> business = businessRepository.findBusinessesByContactMail(request.getEmail());
+
+        if (business.isPresent()){
         String code = String.valueOf(new Random().nextInt(900000)+100000);
         verificationCodeStore.saveCode(request.getEmail(),code);
         emailService.sendVerificationCode(request.getEmail(),code);
         return "Verification Code Send";
+        }else {
+            throw new BusinessNotFoundException("message");//bura bax
+        }
     }
 
     public AuthenticationResponseDto verifyCode(AuthCodeVerficationDto authCodeVerficationDto){

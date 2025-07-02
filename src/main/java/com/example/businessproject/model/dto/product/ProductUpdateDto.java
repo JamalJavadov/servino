@@ -17,15 +17,7 @@ public class ProductUpdateDto {
 
     private String type;
 
-    private List<CommentUpdateDto> comments;
-
-    private Double rating;
-
     private Double price;
 
-    private Integer totatUsedCount;
-
     private String imageUrl;
-
-    private BusinessUpdateDto businessUpdateDto ;
 }

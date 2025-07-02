@@ -1,6 +1,5 @@
 package com.example.businessproject.model.dto.product;
 
-import com.example.businessproject.model.dto.business.BusinessRequestDto;
 import lombok.*;
 
 @Getter
@@ -15,5 +14,5 @@ public class ProductRequestDto {
 
     private Double price;
 
-    private BusinessRequestDto business;
+    private String businessMail;
 }

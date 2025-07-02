@@ -16,16 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BusinessUpdateDto {
-
     private String businessName;
 
     private String businessLocation;
 
-    private List<ProductUpdateDto> products;
-
     private String description;
-
-    private boolean activeStatus;
 
     private String logoUrl;
 

@@ -1,7 +1,6 @@
 package com.example.businessproject.service;
 
 import com.example.businessproject.exception.BusinessNotFoundException;
-import com.example.businessproject.model.dto.business.BusinessRequestDto;
 import com.example.businessproject.model.dto.business.BusinessResponseDto;
 import com.example.businessproject.model.dto.business.BusinessUpdateDto;
 import com.example.businessproject.model.entity.Business;
@@ -19,10 +18,10 @@ public class BusinessService {
 
     public BusinessResponseDto updateBusiness(BusinessUpdateDto businessUpdateDto){
         Business business = businessRepository.findBusinessesByContactMail(businessUpdateDto.getContactMail()).orElseThrow(()->new BusinessNotFoundException("Business Not Found"));
-        Business updatedBusiness = businessMapper.toEntity(businessUpdateDto);
-        updatedBusiness.setId(business.getId());//bu hisseni deyisersen
+        Business updatedBusiness = businessMapper.toEntity(businessUpdateDto,business);
         return businessMapper.toDto(businessRepository.save(updatedBusiness));
     }
+
 
 
 }
