@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class CommentRequestDto {
     private String message;
 
-    private ProductRequestDto productRequestDto;
+    private long productId;
 
-    private User user;
+    private String userGmail;
 }
