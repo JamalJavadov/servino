@@ -23,13 +23,11 @@ public class ApplicationConfig {
     private final BusinessRepository businessRepository;
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> {
-            return repository.findByEmail(username)
-                    .map(user -> (UserDetails) user)
-                    .orElseGet(() -> businessRepository.findBusinessesByContactMail(username)
-                            .map(businessman -> (UserDetails) businessman)
-                            .orElseThrow(() -> new UsernameNotFoundException("User not found")));
-        };
+        return username -> repository.findByEmail(username)
+                .map(user -> (UserDetails) user)
+                .orElseGet(() -> businessRepository.findBusinessesByContactMail(username)
+                        .map(businessman -> (UserDetails) businessman)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found")));
     }
 
 

@@ -2,7 +2,6 @@ package com.example.businessproject.service;
 
 import com.example.businessproject.exception.BusinessNotFoundException;
 import com.example.businessproject.exception.ProductNotFoundException;
-import com.example.businessproject.model.dto.auth.AuthenticationRequestDto;
 import com.example.businessproject.model.dto.product.ProductRequestDto;
 import com.example.businessproject.model.dto.product.ProductResponseDto;
 import com.example.businessproject.model.dto.product.ProductUpdateDto;
@@ -12,7 +11,6 @@ import com.example.businessproject.model.mapper.ProductMapper;
 import com.example.businessproject.repository.BusinessRepository;
 import com.example.businessproject.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +21,6 @@ public class ProductServices {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final BusinessRepository businessRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto){
         Business business = businessRepository.findBusinessesByContactMail(productRequestDto.getBusinessMail()).orElseThrow(()->new BusinessNotFoundException("Business Not Found"));
@@ -43,18 +40,11 @@ public class ProductServices {
                 .toList();
     }
 
-    public List<ProductResponseDto> getBusinessProducts(AuthenticationRequestDto authenticationRequestDto){
-        Business business = businessRepository.findBusinessesByContactMail(authenticationRequestDto.getEmail()).orElseThrow(()->new BusinessNotFoundException("Business Not Found"));
-        if (passwordEncoder.matches(authenticationRequestDto.getPassword(), business.getPassword())){
+    public List<ProductResponseDto> getBusinessProducts(String contactMail){
+        Business business = businessRepository.findBusinessesByContactMail(contactMail).orElseThrow(()->new BusinessNotFoundException("Business Not Found"));
             return business.getProducts().stream()
                     .map(productMapper::toDto)
                     .toList();
-        }else {
-            throw new BusinessNotFoundException("Password is not true");
         }
 
     }
-
-
-
-}
