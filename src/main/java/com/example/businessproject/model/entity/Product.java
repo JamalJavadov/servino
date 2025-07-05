@@ -23,7 +23,7 @@ public class Product {
 
     private String type;
 
-    @OneToMany(mappedBy = "service",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     private Double rating;

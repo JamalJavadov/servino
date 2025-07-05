@@ -24,7 +24,7 @@ public class Comment {
     private LocalDateTime creationAt;
 
     @ManyToOne
-    private Product service;
+    private Product product;
 
     @ManyToOne
     private User user;

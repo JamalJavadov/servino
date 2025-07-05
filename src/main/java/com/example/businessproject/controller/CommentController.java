@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/comment")
@@ -25,6 +27,11 @@ public class CommentController {
     @PutMapping("/update")
     public ResponseEntity<CommentResponseDto> updateComment(@RequestBody CommentUpdateDto commentUpdateDto){
         return ResponseEntity.ok(commentServices.updateComment(commentUpdateDto));
+    }
+
+    @GetMapping("/product-comments/{productid}")
+    public ResponseEntity<List<CommentResponseDto>> getComments(@PathVariable long productid){
+        return ResponseEntity.ok(commentServices.getComments(productid));
     }
 
 }

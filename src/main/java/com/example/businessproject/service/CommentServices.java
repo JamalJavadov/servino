@@ -16,6 +16,8 @@ import com.example.businessproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommentServices {
@@ -29,7 +31,7 @@ public class CommentServices {
         Comment comment = commentMapper.toEntity(commentRequestDto);
         User user = userRepository.findByEmail(commentRequestDto.getUserGmail()).orElseThrow(()->new UserNotFoundException("User Not Found"));
         Product product = productRepository.findProductById(commentRequestDto.getProductId()).orElseThrow(()->new ProductNotFoundException("Product Not Found"));
-        comment.setService(product);
+        comment.setProduct(product);
         comment.setUser(user);
         return commentMapper.toDto(commentRepository.save(comment));
     }
@@ -40,5 +42,17 @@ public class CommentServices {
         updatedComment.setCreationAt(comment.getCreationAt());
         return commentMapper.toDto(commentRepository.save(updatedComment));
     }
+
+    public List<CommentResponseDto> getComments(long productId){
+        List<Comment> comments = commentRepository.findCommentsByProduct_Id(productId);
+        return comments.stream()
+                .map(commentMapper::toDto)
+                .toList();
+    }
+
+
+
+
+
 
 }
