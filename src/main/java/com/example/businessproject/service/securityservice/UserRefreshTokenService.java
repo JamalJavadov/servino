@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class RefreshTokenService {
+public class UserRefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     private final long refreshTokenDurationMs = 7L * 24 * 60 * 60 * 1000;
@@ -26,6 +26,8 @@ public class RefreshTokenService {
                 .build();
         return refreshTokenRepository.save(refreshToken);
     }
+
+
 
     public boolean isExpired(UserRefreshToken refreshToken){
         return refreshToken.getExpiryDate().isBefore(Instant.now());

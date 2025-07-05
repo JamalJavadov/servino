@@ -26,8 +26,8 @@ public class BusinessRefreshTokenService {
                 .expiryDate(Instant.now().plusMillis(refreshTokenDurationMs))
                 .build();
         return businessRefreshTokenRepository.save(refreshToken);
-
     }
+
     public boolean isExpired(BusinessRefreshToken refreshToken){
         return refreshToken.getExpiryDate().isBefore(Instant.now());
     }

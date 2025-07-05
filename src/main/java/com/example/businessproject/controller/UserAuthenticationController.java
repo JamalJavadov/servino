@@ -8,9 +8,9 @@ import com.example.businessproject.model.dto.auth.AuthenticationResponseDto;
 import com.example.businessproject.model.dto.refreshtoken.TokenRefreshRequestDto;
 import com.example.businessproject.model.dto.refreshtoken.TokenRefreshResponseDto;
 import com.example.businessproject.repository.RefreshTokenRepository;
-import com.example.businessproject.service.securityservice.UserAuthenticationService;
+import com.example.businessproject.service.securityservice.AuthenticationService;
 import com.example.businessproject.service.securityservice.JwtService;
-import com.example.businessproject.service.securityservice.RefreshTokenService;
+import com.example.businessproject.service.securityservice.UserRefreshTokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,24 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class UserAuthenticationController {
-    private final UserAuthenticationService service;
-    private final RefreshTokenService refreshTokenService;
+    private final AuthenticationService authenticationService;
+    private final UserRefreshTokenService refreshTokenService;
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody UserRequestDto request) {
-        return ResponseEntity.ok(service.register(request));
+        return ResponseEntity.ok(authenticationService.userRegister(request));
     }
 
     @PostMapping("/send-code")
     public ResponseEntity<String> authenticate(@Valid @RequestBody AuthenticationRequestDto request) {
-        return ResponseEntity.ok(service.authenticateSendCode(request));
+        return ResponseEntity.ok(authenticationService.authenticateSendCode(request));
     }
 
     @PostMapping("/verify-code")
     public ResponseEntity<AuthenticationResponseDto> verifyCode(@Valid @RequestBody AuthCodeVerficationDto authCodeVerfication) {
-        return ResponseEntity.ok(service.verifyCode(authCodeVerfication));
+        return ResponseEntity.ok(authenticationService.verifyCode(authCodeVerfication));
     }
 
     @PostMapping("/refresh-token")

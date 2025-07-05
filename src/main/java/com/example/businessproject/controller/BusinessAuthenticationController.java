@@ -8,7 +8,7 @@ import com.example.businessproject.model.dto.refreshtoken.TokenRefreshRequestDto
 import com.example.businessproject.model.dto.refreshtoken.TokenRefreshResponseDto;
 import com.example.businessproject.model.entity.Business;
 import com.example.businessproject.repository.BusinessRefreshTokenRepository;
-import com.example.businessproject.service.securityservice.BusinessAuthenticationService;
+import com.example.businessproject.service.securityservice.AuthenticationService;
 import com.example.businessproject.service.securityservice.BusinessRefreshTokenService;
 import com.example.businessproject.service.securityservice.JwtService;
 import jakarta.validation.Valid;
@@ -25,23 +25,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/authbusiness")
 public class BusinessAuthenticationController {
     private final BusinessRefreshTokenService businessRefreshTokenService;
-    private final BusinessAuthenticationService businessService;
+    private final AuthenticationService authenticationService;
     private final BusinessRefreshTokenRepository businessRefreshTokenRepository;
     private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody BusinessRequestDto businessRequestDto){
-        return ResponseEntity.ok(businessService.register(businessRequestDto));
+        return ResponseEntity.ok(authenticationService.businessRegister(businessRequestDto));
     }
 
     @PostMapping("/send-code")
     public ResponseEntity<String> authenticate(@Valid @RequestBody AuthenticationRequestDto request) {
-        return ResponseEntity.ok(businessService.authenticateSendCode(request));
+        return ResponseEntity.ok(authenticationService.authenticateSendCode(request));
     }
 
     @PostMapping("/verify-code")
     public ResponseEntity<AuthenticationResponseDto> verifyCode(@Valid @RequestBody AuthCodeVerficationDto authCodeVerfication) {
-        return ResponseEntity.ok(businessService.verifyCode(authCodeVerfication));
+        return ResponseEntity.ok(authenticationService.verifyCode(authCodeVerfication));
     }
 
     @PostMapping("/refresh-token")

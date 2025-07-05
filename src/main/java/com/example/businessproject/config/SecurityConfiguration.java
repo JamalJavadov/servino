@@ -3,7 +3,7 @@ package com.example.businessproject.config;
 
 import com.example.businessproject.repository.UserRepository;
 import com.example.businessproject.service.securityservice.JwtService;
-import com.example.businessproject.service.securityservice.RefreshTokenService;
+import com.example.businessproject.service.securityservice.UserRefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final AuthenticationProvider authenticationProvider;
-    private final RefreshTokenService refreshTokenService;
+    private final UserRefreshTokenService refreshTokenService;
     @Bean
     public CustomOAuth2UserService customOAuth2UserService() {
         return new CustomOAuth2UserService(userRepository); // inject əl ilə

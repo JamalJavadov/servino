@@ -1,28 +1,22 @@
 package com.example.businessproject.model.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.Instant;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BusinessRefreshToken {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(unique = true,nullable = false)
-    private String token;
-
+public class BusinessRefreshToken extends RefreshToken {
     @OneToOne
     @JoinColumn(name = "business_id",referencedColumnName = "id")
     private Business business;
-
-    @Column(nullable = false)
-    private Instant expiryDate;
 }

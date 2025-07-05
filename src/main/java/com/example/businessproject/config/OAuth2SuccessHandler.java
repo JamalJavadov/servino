@@ -5,7 +5,7 @@ import com.example.businessproject.model.entity.Role;
 import com.example.businessproject.model.entity.User;
 import com.example.businessproject.repository.UserRepository;
 import com.example.businessproject.service.securityservice.JwtService;
-import com.example.businessproject.service.securityservice.RefreshTokenService;
+import com.example.businessproject.service.securityservice.UserRefreshTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
-    private final RefreshTokenService refreshTokenService;
+    private final UserRefreshTokenService refreshTokenService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

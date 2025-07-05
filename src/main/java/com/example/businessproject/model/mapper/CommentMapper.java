@@ -16,6 +16,6 @@ public interface CommentMapper {
     CommentResponseDto toDto(Comment comment);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Comment toEntity(CommentUpdateDto commentUpdateDto);
+    Comment toEntity(CommentUpdateDto commentUpdateDto,@MappingTarget Comment comment);
 }
 

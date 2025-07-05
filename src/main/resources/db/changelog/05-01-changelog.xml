@@ -3,9 +3,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd"
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1751095311646-1" author="camal">
+    <changeSet id="1751700536749-1" author="camal">
         <createTable tableName="business">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_business"/>
@@ -23,7 +23,7 @@
             <column name="password" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-2" author="camal">
+    <changeSet id="1751700536749-2" author="camal">
         <createTable tableName="business_products">
             <column name="business_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -33,7 +33,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-3" author="camal">
+    <changeSet id="1751700536749-3" author="camal">
         <createTable tableName="business_refresh_token">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_businessrefreshtoken"/>
@@ -41,24 +41,24 @@
             <column name="token" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="business_id" type="BIGINT"/>
             <column name="expiry_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
+            <column name="business_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-4" author="camal">
+    <changeSet id="1751700536749-4" author="camal">
         <createTable tableName="comment">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_comment"/>
             </column>
             <column name="message" type="VARCHAR(255)"/>
             <column name="creation_at" type="DATETIME"/>
-            <column name="service_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-5" author="camal">
+    <changeSet id="1751700536749-5" author="camal">
         <createTable tableName="product">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
@@ -73,7 +73,7 @@
             <column name="image_url" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-6" author="camal">
+    <changeSet id="1751700536749-6" author="camal">
         <createTable tableName="user_refresh_token">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_userrefreshtoken"/>
@@ -81,13 +81,13 @@
             <column name="token" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="BIGINT"/>
             <column name="expiry_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
+            <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-7" author="camal">
+    <changeSet id="1751700536749-7" author="camal">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
@@ -103,7 +103,7 @@
             <column name="avatar_url" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-8" author="camal">
+    <changeSet id="1751700536749-8" author="camal">
         <createTable tableName="users_comments">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -113,7 +113,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-9" author="camal">
+    <changeSet id="1751700536749-9" author="camal">
         <createTable tableName="users_products">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -123,84 +123,84 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1751095311646-10" author="camal">
+    <changeSet id="1751700536749-10" author="camal">
         <addUniqueConstraint columnNames="products_id" constraintName="uc_business_products_products"
                              tableName="business_products"/>
     </changeSet>
-    <changeSet id="1751095311646-11" author="camal">
+    <changeSet id="1751700536749-11" author="camal">
         <addUniqueConstraint columnNames="business_id" constraintName="uc_businessrefreshtoken_business"
                              tableName="business_refresh_token"/>
     </changeSet>
-    <changeSet id="1751095311646-12" author="camal">
+    <changeSet id="1751700536749-12" author="camal">
         <addUniqueConstraint columnNames="token" constraintName="uc_businessrefreshtoken_token"
                              tableName="business_refresh_token"/>
     </changeSet>
-    <changeSet id="1751095311646-13" author="camal">
+    <changeSet id="1751700536749-13" author="camal">
         <addUniqueConstraint columnNames="token" constraintName="uc_userrefreshtoken_token"
                              tableName="user_refresh_token"/>
     </changeSet>
-    <changeSet id="1751095311646-14" author="camal">
+    <changeSet id="1751700536749-14" author="camal">
         <addUniqueConstraint columnNames="user_id" constraintName="uc_userrefreshtoken_user"
                              tableName="user_refresh_token"/>
     </changeSet>
-    <changeSet id="1751095311646-15" author="camal">
+    <changeSet id="1751700536749-15" author="camal">
         <addUniqueConstraint columnNames="comments_id" constraintName="uc_users_comments_comments"
                              tableName="users_comments"/>
     </changeSet>
-    <changeSet id="1751095311646-16" author="camal">
+    <changeSet id="1751700536749-16" author="camal">
         <addUniqueConstraint columnNames="products_id" constraintName="uc_users_products_products"
                              tableName="users_products"/>
     </changeSet>
-    <changeSet id="1751095311646-17" author="camal">
+    <changeSet id="1751700536749-17" author="camal">
         <addForeignKeyConstraint baseColumnNames="business_id" baseTableName="business_refresh_token"
                                  constraintName="FK_BUSINESSREFRESHTOKEN_ON_BUSINESS" referencedColumnNames="id"
                                  referencedTableName="business"/>
     </changeSet>
-    <changeSet id="1751095311646-18" author="camal">
-        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="comment"
-                                 constraintName="FK_COMMENT_ON_SERVICE" referencedColumnNames="id"
+    <changeSet id="1751700536749-18" author="camal">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="comment"
+                                 constraintName="FK_COMMENT_ON_PRODUCT" referencedColumnNames="id"
                                  referencedTableName="product"/>
     </changeSet>
-    <changeSet id="1751095311646-19" author="camal">
+    <changeSet id="1751700536749-19" author="camal">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="comment" constraintName="FK_COMMENT_ON_USER"
                                  referencedColumnNames="id" referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1751095311646-20" author="camal">
+    <changeSet id="1751700536749-20" author="camal">
         <addForeignKeyConstraint baseColumnNames="business_id" baseTableName="product"
                                  constraintName="FK_PRODUCT_ON_BUSINESS" referencedColumnNames="id"
                                  referencedTableName="business"/>
     </changeSet>
-    <changeSet id="1751095311646-21" author="camal">
+    <changeSet id="1751700536749-21" author="camal">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_refresh_token"
                                  constraintName="FK_USERREFRESHTOKEN_ON_USER" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1751095311646-22" author="camal">
+    <changeSet id="1751700536749-22" author="camal">
         <addForeignKeyConstraint baseColumnNames="business_id" baseTableName="business_products"
                                  constraintName="fk_buspro_on_business" referencedColumnNames="id"
                                  referencedTableName="business"/>
     </changeSet>
-    <changeSet id="1751095311646-23" author="camal">
+    <changeSet id="1751700536749-23" author="camal">
         <addForeignKeyConstraint baseColumnNames="products_id" baseTableName="business_products"
                                  constraintName="fk_buspro_on_product" referencedColumnNames="id"
                                  referencedTableName="product"/>
     </changeSet>
-    <changeSet id="1751095311646-24" author="camal">
+    <changeSet id="1751700536749-24" author="camal">
         <addForeignKeyConstraint baseColumnNames="comments_id" baseTableName="users_comments"
                                  constraintName="fk_usecom_on_comment" referencedColumnNames="id"
                                  referencedTableName="comment"/>
     </changeSet>
-    <changeSet id="1751095311646-25" author="camal">
+    <changeSet id="1751700536749-25" author="camal">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_comments"
                                  constraintName="fk_usecom_on_user" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1751095311646-26" author="camal">
+    <changeSet id="1751700536749-26" author="camal">
         <addForeignKeyConstraint baseColumnNames="products_id" baseTableName="users_products"
                                  constraintName="fk_usepro_on_product" referencedColumnNames="id"
                                  referencedTableName="product"/>
     </changeSet>
-    <changeSet id="1751095311646-27" author="camal">
+    <changeSet id="1751700536749-27" author="camal">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_products"
                                  constraintName="fk_usepro_on_user" referencedColumnNames="id"
                                  referencedTableName="users"/>

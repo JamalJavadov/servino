@@ -8,7 +8,6 @@ import com.example.businessproject.model.dto.product.ProductResponseDto;
 import com.example.businessproject.model.dto.product.ProductUpdateDto;
 import com.example.businessproject.model.entity.Business;
 import com.example.businessproject.model.entity.Product;
-import com.example.businessproject.model.mapper.BusinessMapper;
 import com.example.businessproject.model.mapper.ProductMapper;
 import com.example.businessproject.repository.BusinessRepository;
 import com.example.businessproject.repository.ProductRepository;
@@ -16,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +24,6 @@ public class ProductServices {
     private final ProductMapper productMapper;
     private final BusinessRepository businessRepository;
     private final PasswordEncoder passwordEncoder;
-    private final BusinessMapper businessMapper;
 
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto){
         Business business = businessRepository.findBusinessesByContactMail(productRequestDto.getBusinessMail()).orElseThrow(()->new BusinessNotFoundException("Business Not Found"));
@@ -37,7 +34,7 @@ public class ProductServices {
 
     public ProductResponseDto updateProduct(ProductUpdateDto productUpdateDto){
         Product product = productRepository.findProductById(productUpdateDto.getId()).orElseThrow(()->new ProductNotFoundException("Product Do Not Found"));
-        return productMapper.toDto(productRepository.save(productMapper.toEntity(productUpdateDto)));//bura baxarsan
+        return productMapper.toDto(productRepository.save(productMapper.toEntity(productUpdateDto,product)));
     }
 
     public List<ProductResponseDto> getAll(){
