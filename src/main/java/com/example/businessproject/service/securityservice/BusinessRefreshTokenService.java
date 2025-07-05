@@ -2,7 +2,6 @@ package com.example.businessproject.service.securityservice;
 
 import com.example.businessproject.model.entity.Business;
 import com.example.businessproject.model.entity.BusinessRefreshToken;
-import com.example.businessproject.model.entity.UserRefreshToken;
 import com.example.businessproject.repository.BusinessRefreshTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
