@@ -15,10 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -67,5 +64,11 @@ public class BusinessAuthenticationController {
                     businessRefreshTokenService.deleteByBusiness(refreshToken.getBusiness());
                     return ResponseEntity.ok("Business logged out successfully");
                 }).orElseGet(()->ResponseEntity.status(HttpStatus.NOT_FOUND).body("Refresh Token Not Found"));
+    }
+
+
+    @GetMapping("/test")
+    public String tester(){
+        return "Salam it is running";
     }
 }

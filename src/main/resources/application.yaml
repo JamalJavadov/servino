@@ -1,11 +1,12 @@
 server:
   port: 8081
 
+
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://yamanote.proxy.rlwy.net:49909/postgres
+    username: postgres
+    password: AXjejWOtybHqxgACUhBABdZuJBUKZSte
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -14,20 +15,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
-
+            client-id: 1057135930964-vd4pk6q14s4a8gk4nprrb81rg0q221j5.apps.googleusercontent.com
+            client-secret: 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
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: camallaoyrenin@gmail.com
+    password: xflw qqma mnqg mmsa
     properties:
       mail:
         smtp:
