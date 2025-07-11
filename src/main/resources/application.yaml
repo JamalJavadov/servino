@@ -1,11 +1,11 @@
 server:
-  port: ${PORT:8080}
+  port: 8081
 
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -20,14 +20,14 @@ spring:
       client:
         registration:
           google:
-            client-id: 1057135930964-vd4pk6q14s4a8gk4nprrb81rg0q221j5.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: camallaoyrenin@gmail.com
-    password: xflw qqma mnqg mmsa
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
