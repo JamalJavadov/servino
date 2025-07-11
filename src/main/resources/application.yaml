@@ -1,12 +1,11 @@
 server:
-  port: 8081
-
+  port: ${PORT:8080}
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/businessdb
-    username: postgres
-    password: camal123
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -15,6 +14,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
   security:
     oauth2:
       client:
@@ -22,6 +22,7 @@ spring:
           google:
             client-id: 1057135930964-vd4pk6q14s4a8gk4nprrb81rg0q221j5.apps.googleusercontent.com
             client-secret: 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
+
   mail:
     host: smtp.gmail.com
     port: 587
