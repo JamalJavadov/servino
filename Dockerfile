@@ -1,12 +1,11 @@
-FROM eclipse-temurin:21-jdk
+FROM maven:3.9.6-eclipse-temurin-21
 
 WORKDIR /app
 
 COPY . .
 
-# ADD THIS LINE to give execute permission
 RUN chmod +x mvnw
 
-RUN ./mvnw clean install
+RUN ./mvnw -v
 
 CMD ["java", "-jar", "target/business-project-0.0.1-SNAPSHOT.jar"]
