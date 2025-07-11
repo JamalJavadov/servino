@@ -16,7 +16,8 @@ COPY src ./src
 
 # 3. Build the application. 'package' is sufficient.
 # Tests are run by default. Use -DskipTests if you test elsewhere.
-RUN mvn package
+RUN mvn -X package -DskipTests
+
 
 #--------------------------------------------------
 # Stage 2: Create the final, lightweight runtime image
