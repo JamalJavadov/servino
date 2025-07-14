@@ -52,6 +52,11 @@ public class SecurityConfiguration {
                                 "/index.html",
                                 "/google-success.html",
                                 "/css/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/webjars/**",
                                 "/js/**",
                                 "/images/**",
                                 "/api/v1/authbusiness/**").permitAll()
